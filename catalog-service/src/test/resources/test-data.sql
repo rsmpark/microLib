@@ -43,5 +43,5 @@ values ('P100', 'The Hunger Games', 'Winning will make you famous. Losing means 
         'https://images.gr-assets.com/books/1516211014l/332613.jpg', 23.0),
        ('P114', 'Fifty Shades of Grey',
         'When literature student Anastasia Steele goes to interview young entrepreneur Christian Grey, she encounters a man who is beautiful, brilliant, and intimidating.',
-        'https://images.gr-assets.com/books/1385207843l/10818853.jpg', 27.0),
+        'https://images.gr-assets.com/books/1385207843l/10818853.jpg', 27.0)
 ;
