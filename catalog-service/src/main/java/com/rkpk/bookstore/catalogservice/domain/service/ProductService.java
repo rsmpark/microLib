@@ -1,5 +1,6 @@
 package com.rkpk.bookstore.catalogservice.domain.service;
 
+import com.rkpk.bookstore.catalogservice.config.ApplicationProperties;
 import com.rkpk.bookstore.catalogservice.domain.PagedResult;
 import com.rkpk.bookstore.catalogservice.domain.dto.Product;
 import com.rkpk.bookstore.catalogservice.domain.map.ProductMapper;
@@ -14,15 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ApplicationProperties properties;
 
-    ProductService(ProductRepository productRepository) {
+    ProductService(ProductRepository productRepository, ApplicationProperties properties) {
         this.productRepository = productRepository;
+        this.properties = properties;
     }
 
     public PagedResult<Product> getProducts(int pageNo) {
         Sort sort = Sort.by("name").ascending();
         pageNo = pageNo <= 1 ? 0 : pageNo - 1;
-        Pageable pageable = PageRequest.of(pageNo, 10, sort);
+        Pageable pageable = PageRequest.of(pageNo, properties.pageSize(), sort);
         var productsPage = productRepository.findAll(pageable)
                 .map(ProductMapper::toProduct);
 
