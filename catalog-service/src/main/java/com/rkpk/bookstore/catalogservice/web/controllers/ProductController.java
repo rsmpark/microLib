@@ -3,10 +3,9 @@ package com.rkpk.bookstore.catalogservice.web.controllers;
 import com.rkpk.bookstore.catalogservice.domain.PagedResult;
 import com.rkpk.bookstore.catalogservice.domain.dto.Product;
 import com.rkpk.bookstore.catalogservice.domain.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.rkpk.bookstore.catalogservice.web.exception.ProductNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/products")
@@ -20,5 +19,12 @@ public class ProductController {
     @GetMapping
     PagedResult<Product> getProducts(@RequestParam(name = "page", defaultValue = "1") int pageNo) {
         return productService.getProducts(pageNo);
+    }
+
+    @GetMapping("/{code}")
+    ResponseEntity<Product> getProductByCode(@PathVariable String code) {
+        return productService.getProductByCode(code)
+                .map(product -> ResponseEntity.ok(product))
+                .orElseThrow(() -> ProductNotFoundException.forCode(code));
     }
 }
