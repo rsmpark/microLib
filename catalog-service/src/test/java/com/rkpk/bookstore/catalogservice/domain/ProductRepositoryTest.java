@@ -1,21 +1,20 @@
 package com.rkpk.bookstore.catalogservice.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.rkpk.bookstore.catalogservice.domain.entity.ProductEntity;
 import com.rkpk.bookstore.catalogservice.domain.repository.ProductRepository;
+import java.math.BigDecimal;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DataJpaTest(
         properties = {
-                "spring.test.database.replace=none",
-                "spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db",
+            "spring.test.database.replace=none",
+            "spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db",
         })
 @Sql("/test-data.sql")
 public class ProductRepositoryTest {

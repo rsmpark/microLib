@@ -5,13 +5,12 @@ import com.rkpk.bookstore.catalogservice.domain.PagedResult;
 import com.rkpk.bookstore.catalogservice.domain.dto.Product;
 import com.rkpk.bookstore.catalogservice.domain.map.ProductMapper;
 import com.rkpk.bookstore.catalogservice.domain.repository.ProductRepository;
+import java.util.Optional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,8 +27,7 @@ public class ProductService {
         Sort sort = Sort.by("name").ascending();
         pageNo = pageNo <= 1 ? 0 : pageNo - 1;
         Pageable pageable = PageRequest.of(pageNo, properties.pageSize(), sort);
-        var productsPage = productRepository.findAll(pageable)
-                .map(ProductMapper::toProduct);
+        var productsPage = productRepository.findAll(pageable).map(ProductMapper::toProduct);
 
         return new PagedResult<>(
                 productsPage.getContent(),

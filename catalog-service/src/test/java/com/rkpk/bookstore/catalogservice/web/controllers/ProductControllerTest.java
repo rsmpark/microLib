@@ -1,17 +1,16 @@
 package com.rkpk.bookstore.catalogservice.web.controllers;
 
-import com.rkpk.bookstore.catalogservice.AbstractIT;
-import com.rkpk.bookstore.catalogservice.domain.dto.Product;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.jdbc.Sql;
-
-import java.math.BigDecimal;
-
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+
+import com.rkpk.bookstore.catalogservice.AbstractIT;
+import com.rkpk.bookstore.catalogservice.domain.dto.Product;
+import io.restassured.http.ContentType;
+import java.math.BigDecimal;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.context.jdbc.Sql;
 
 @Sql("/test-data.sql")
 public class ProductControllerTest extends AbstractIT {
